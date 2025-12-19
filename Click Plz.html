@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Nadu</title>
+
+<!-- Signature Style Font -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffd1dc,#ffffff);
+    font-family: Arial, sans-serif;
+    overflow:hidden;
+}
+
+.screen{
+    display:none;
+    text-align:center;
+    padding:20px;
+}
+.active{display:block}
+
+/* ===== Screen 1 ===== */
+.happy{
+    font-family:'Great Vibes', cursive;
+    font-size:46px;
+    font-weight:bold;
+    color:#ff2f7d;
+    text-shadow:
+      0 0 6px #fff,
+      0 0 18px #ff9ac6,
+      0 0 35px #ff4f8b;
+    animation:glow 2s infinite alternate, zoom 1.6s ease;
+}
+
+.name{
+    font-family:'Great Vibes', cursive;
+    font-size:54px;
+    font-weight:bold;
+    color:#ff4f8b;
+    margin-top:5px;
+    animation:fadeUp 2s ease;
+}
+
+.tap{
+    margin-top:18px;
+    font-size:18px;
+    color:#666;
+}
+
+@keyframes glow{
+    from{ text-shadow:0 0 6px #fff,0 0 18px #ff9ac6;}
+    to{ text-shadow:0 0 10px #fff,0 0 40px #ff4f8b;}
+}
+
+@keyframes zoom{
+    from{transform:scale(0);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* ===== Gift Emoji ===== */
+.gift{
+    font-size:120px;
+    color:#ff5c9a;
+    animation:bounce 1.6s infinite;
+    cursor:pointer;
+}
+
+.ribbon{
+    font-size:18px;
+    color:#666;
+    margin-top:10px;
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-22px)}
+}
+
+/* ===== Card ===== */
+.card{
+    background:white;
+    padding:30px;
+    border-radius:22px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.25);
+    max-width:340px;
+}
+
+.card p{
+    font-size:18px;
+    color:#444;
+    line-height:1.6;
+}
+
+.from{
+    margin-top:14px;
+    font-size:18px;
+    font-weight:bold;
+    color:#ff4f8b;
+}
+
+/* ===== Heart ===== */
+.love{
+    font-size:42px;
+    margin-top:10px;
+    animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.4)}
+}
+
+/* ===== Fireworks ===== */
+.spark{
+    position:absolute;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    animation:explode 1.4s ease-out forwards;
+}
+
+@keyframes explode{
+    from{transform:translate(0,0) scale(1);opacity:1}
+    to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Screen 1 -->
+<div class="screen active" id="s1" onclick="next(1)">
+    <div class="happy">Happy Birthday</div>
+    <div class="name">Nadu</div>
+    <div class="tap">Tap gently ✨</div>
+</div>
+
+<!-- Screen 2 -->
+<div class="screen" id="s2">
+    <div class="gift" onclick="openGift()">🎁</div>
+    <div class="ribbon">Touch and open the gift 💗</div>
+</div>
+
+<!-- Screen 3 -->
+<div class="screen" id="s3">
+    <div class="card">
+        <p>
+            I thought really hard about the perfect gift…<br>
+            then realized I couldn’t find anything better.<br><br>
+            So I gave <b>myself</b> 😌❤️<br>
+            <i>Handle with care — once unboxed, no return 😉</i>
+        </p>
+        <div class="love">💖</div>
+        <div class="from">— LOML</div>
+    </div>
+</div>
+
+<script>
+function next(n){
+    document.getElementById("s"+n).classList.remove("active");
+    document.getElementById("s"+(n+1)).classList.add("active");
+}
+
+function openGift(){
+    document.getElementById("s2").classList.remove("active");
+    document.getElementById("s3").classList.add("active");
+    fireworks();
+}
+
+function fireworks(){
+    const colors=["gold","red","white"];
+    for(let i=0;i<60;i++){
+        let s=document.createElement("div");
+        s.className="spark";
+        s.style.background=colors[Math.floor(Math.random()*colors.length)];
+        s.style.left="50%";
+        s.style.top="50%";
+        s.style.setProperty("--x",(Math.random()*500-250)+"px");
+        s.style.setProperty("--y",(Math.random()*500-250)+"px");
+        document.body.appendChild(s);
+        setTimeout(()=>s.remove(),1400);
+    }
+}
+</script>
+
+</body>
+</html>
